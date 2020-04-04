@@ -2,19 +2,17 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
+func print(s string) {
+	fmt.Println(s)
+}
+
 func main() {
-	var n int
-	fmt.Scanf("%d", &n)
+	var wg sync.WaitGroup
 
-	nums := make([]int, n)
-
-	for i := 0; i < n; i++ {
-		fmt.Scanf("%d", &nums[i])
-	}
-
-	for i := 0; i < n; i++ {
-		fmt.Println(i, nums[i])
-	}
+	wg.Add(1)
+	go print("jeje")
+	wg.Wait()
 }

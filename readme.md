@@ -13,4 +13,4 @@ I like Go. Let's see if I can make you like it too!
     - Hacking :3
     - Benchmarks
 1. Other stuff
-    - ...
+    - Key/val server from scratch

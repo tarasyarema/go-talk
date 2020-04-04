@@ -1,13 +1,17 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"math"
-	"os"
 	"strconv"
 	"strings"
 )
+
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
 
 // Min returns the min
 func Min(x, y int) int {
@@ -139,88 +143,4 @@ func digits(n int) int64 {
 	}
 
 	return int64(math.Floor(float64(digits))) + 1
-}
-
-func main() {
-	file, err := os.Open("in0")
-	check(err)
-
-	r := bufio.NewReader(file)
-
-	l, _, err := r.ReadLine()
-	check(err)
-
-	n, err := strconv.Atoi(string(l))
-	check(err)
-
-	var sum int64
-	sum = 0
-
-	for i := 0; i < n; i++ {
-		t, _, err := r.ReadLine()
-		check(err)
-
-		d, err := strconv.Atoi(string(t))
-		check(err)
-
-		f, err := factorial(d)
-		check(err)
-
-		// fmt.Println(d, int64(len(f.String())))
-		sum += int64(len(f.String()))
-	}
-
-	fmt.Println("Phase 0:", sum)
-
-	file.Close()
-
-	file, err = os.Open("in1")
-	check(err)
-
-	r = bufio.NewReader(file)
-
-	l, _, err = r.ReadLine()
-	check(err)
-
-	n, err = strconv.Atoi(string(l))
-	check(err)
-
-	str := ""
-
-	for i := 0; i < n; i++ {
-		t, _, err := r.ReadLine()
-		check(err)
-
-		tt := strings.Split(string(t), " ")
-
-		d := make([]int, len(tt))
-
-		for j := range tt {
-			tmp, err := strconv.Atoi(tt[j])
-			check(err)
-
-			d[j] = tmp
-		}
-
-		f, err := factorial(d[0])
-		check(err)
-
-		fs := f.String()
-
-		start := len(fs) - d[1] + 1
-		end := len(fs) - d[2]
-
-		// fmt.Println(i, d, len(fs), start-end, fs, fs[end:start])
-		str += fs[end:start]
-	}
-
-	file.Close()
-
-	fmt.Println("Phase 1:", str)
-}
-
-func check(err error) {
-	if err != nil {
-		panic(err)
-	}
 }
